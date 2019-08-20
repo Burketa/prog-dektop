@@ -23,6 +23,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JOptionPane;
@@ -50,12 +51,16 @@ public class Janela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabelNome = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jButtonClick = new javax.swing.JButton();
         jLabelOutput = new javax.swing.JLabel();
         jCheckBoxBold = new javax.swing.JCheckBox();
         jCheckBoxItalic = new javax.swing.JCheckBox();
+        jRadioButtonBlue = new javax.swing.JRadioButton();
+        jRadioButtonRed = new javax.swing.JRadioButton();
+        jRadioButtonBlack = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,11 +73,32 @@ public class Janela extends javax.swing.JFrame {
             }
         });
 
+        jLabelOutput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelOutput.setText("Output");
 
         jCheckBoxBold.setText("Negrito");
 
         jCheckBoxItalic.setText("Italico");
+
+        buttonGroup1.add(jRadioButtonBlue);
+        jRadioButtonBlue.setText("Azul");
+        jRadioButtonBlue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonBlueActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButtonRed);
+        jRadioButtonRed.setText("Vermelho");
+        jRadioButtonRed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonRedActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButtonBlack);
+        jRadioButtonBlack.setSelected(true);
+        jRadioButtonBlack.setText("Preto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,39 +107,59 @@ public class Janela extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabelNome)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabelOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabelNome)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
-                                .addComponent(jButtonClick)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelOutput))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                                .addComponent(jButtonClick))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxBold)
+                                    .addComponent(jCheckBoxItalic))))
+                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxBold)
-                            .addComponent(jCheckBoxItalic))))
-                .addContainerGap(130, Short.MAX_VALUE))
+                            .addComponent(jRadioButtonRed)
+                            .addComponent(jRadioButtonBlue)
+                            .addComponent(jRadioButtonBlack))))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelOutput))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelNome)
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonClick)
-                .addGap(18, 18, 18)
-                .addComponent(jCheckBoxBold)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBoxItalic)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonClick)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jRadioButtonBlack)
+                        .addGap(1, 1, 1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxBold)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBoxItalic))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jRadioButtonBlue)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButtonRed)))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 416, 338);
@@ -124,16 +170,16 @@ public class Janela extends javax.swing.JFrame {
 
         boolean isBold = jCheckBoxBold.isSelected();
         boolean isItalic = jCheckBoxItalic.isSelected();
-        Font font = new Font("Verdana", Font.PLAIN, 12);
-
-        jLabelOutput.setText(jTextFieldNome.getText());
+        Font font = new Font("Tahoma", Font.PLAIN, 12);
 
         String title = "Opções";
         String msg = "Confirme:\n" + "Negrito: " + isBold + "\nItalico: " + isItalic;
 
         if (showOptionPane(this, title, msg)) {
+            jLabelOutput.setText(jTextFieldNome.getText());
+        
             jLabelOutput.setFont(font.deriveFont(Font.PLAIN));
-            
+
             if (isBold) {
                 jLabelOutput.setFont(font.deriveFont(jLabelOutput.getFont().getStyle() | Font.BOLD));
             }
@@ -141,8 +187,32 @@ public class Janela extends javax.swing.JFrame {
             if (isItalic) {
                 jLabelOutput.setFont(font.deriveFont(jLabelOutput.getFont().getStyle() | Font.ITALIC));
             }
+            System.out.println(buttonGroup1.getSelection().getMnemonic());
+            switch (buttonGroup1.getSelection().getMnemonic()) {
+                case 1:
+                    jLabelOutput.setForeground(Color.black);
+                    break;
+
+                case 2:
+                    jLabelOutput.setForeground(Color.blue);
+                    break;
+
+                case 3:
+                    jLabelOutput.setForeground(Color.red);
+                    break;
+            }
         }
+
+
     }//GEN-LAST:event_jButtonClickMouseClicked
+
+    private void jRadioButtonBlueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonBlueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonBlueActionPerformed
+
+    private void jRadioButtonRedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonRedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,11 +250,15 @@ public class Janela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButtonClick;
     private javax.swing.JCheckBox jCheckBoxBold;
     private javax.swing.JCheckBox jCheckBoxItalic;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelOutput;
+    private javax.swing.JRadioButton jRadioButtonBlack;
+    private javax.swing.JRadioButton jRadioButtonBlue;
+    private javax.swing.JRadioButton jRadioButtonRed;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 
