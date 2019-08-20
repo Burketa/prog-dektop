@@ -23,6 +23,11 @@
  */
 package view;
 
+import java.awt.Component;
+import java.awt.Font;
+import javax.swing.JOptionPane;
+//import Utils;
+
 /**
  *
  * @author burca
@@ -49,6 +54,8 @@ public class Janela extends javax.swing.JFrame {
         jTextFieldNome = new javax.swing.JTextField();
         jButtonClick = new javax.swing.JButton();
         jLabelOutput = new javax.swing.JLabel();
+        jCheckBoxBold = new javax.swing.JCheckBox();
+        jCheckBoxItalic = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,23 +70,34 @@ public class Janela extends javax.swing.JFrame {
 
         jLabelOutput.setText("Output");
 
+        jCheckBoxBold.setText("Negrito");
+
+        jCheckBoxItalic.setText("Italico");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelOutput)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(52, 52, 52)
-                            .addComponent(jLabelNome)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(62, 62, 62)
-                            .addComponent(jButtonClick))))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(jLabelNome)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(jButtonClick)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelOutput))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxBold)
+                            .addComponent(jCheckBoxItalic))))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,20 +105,43 @@ public class Janela extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNome)
-                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelOutput))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonClick)
-                .addGap(67, 67, 67)
-                .addComponent(jLabelOutput)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBoxBold)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxItalic)
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 416, 338);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonClickMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClickMouseClicked
-        assert !jTextFieldNome.getText().equals("") ;
+        assert !jTextFieldNome.getText().equals("");
+
+        boolean isBold = jCheckBoxBold.isSelected();
+        boolean isItalic = jCheckBoxItalic.isSelected();
+        Font font = new Font("Verdana", Font.PLAIN, 12);
+
         jLabelOutput.setText(jTextFieldNome.getText());
+
+        String title = "Opções";
+        String msg = "Confirme:\n" + "Negrito: " + isBold + "\nItalico: " + isItalic;
+
+        if (showOptionPane(this, title, msg)) {
+            jLabelOutput.setFont(font.deriveFont(Font.PLAIN));
+            
+            if (isBold) {
+                jLabelOutput.setFont(font.deriveFont(jLabelOutput.getFont().getStyle() | Font.BOLD));
+            }
+
+            if (isItalic) {
+                jLabelOutput.setFont(font.deriveFont(jLabelOutput.getFont().getStyle() | Font.ITALIC));
+            }
+        }
     }//GEN-LAST:event_jButtonClickMouseClicked
 
     /**
@@ -140,8 +181,14 @@ public class Janela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonClick;
+    private javax.swing.JCheckBox jCheckBoxBold;
+    private javax.swing.JCheckBox jCheckBoxItalic;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelOutput;
     private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
+
+    public boolean showOptionPane(Component parent, String title, String msg) {
+        return JOptionPane.showConfirmDialog(parent, msg, title, JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0;
+    }
 }
