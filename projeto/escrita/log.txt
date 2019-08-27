@@ -1,0 +1,12 @@
+Log criado em Tue Aug 27 20:09:31 BRT 2019
+
+C:\Users\Aluno\Desktop\utfpr-desktop\projeto\escrita\log.txt
+C:\Users\Aluno\Desktop\utfpr-desktop\projeto\escrita
+É diretorio? false
+É arquivo? true
+Tamanho = 0 bytes./nC:\Users\Aluno\Desktop\utfpr-desktop\projeto\escrita\subdir1
+C:\Users\Aluno\Desktop\utfpr-desktop\projeto\escrita
+É diretorio? true
+É arquivo? false
+Tamanho = 0 bytes./n
+Fim.
