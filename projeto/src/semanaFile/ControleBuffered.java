@@ -52,6 +52,9 @@ public class ControleBuffered {
             while (bufferedReader.ready()) {
                 string.append(bufferedReader.readLine()).append("\n");
             }
+            
+            bufferedReader.close();
+            
         } catch (IOException exp) {
             System.err.println(exp);
         } finally {
@@ -59,4 +62,19 @@ public class ControleBuffered {
         }
     }
 
+    public void escreveArquivo(File file, String str, boolean append) {
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try {
+            fileWriter = new FileWriter(file, append);
+            bufferedWriter = new BufferedWriter(fileWriter);
+            
+            bufferedWriter.write(str);
+            
+            bufferedWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ControleBuffered.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
