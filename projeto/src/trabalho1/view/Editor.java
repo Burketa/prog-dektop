@@ -202,90 +202,38 @@ public class Editor extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_button_exitActionPerformed
 
     private void menu_button_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_button_saveActionPerformed
-        //Faz o encode dos registros pra forma certa pra poder ser aberto corretamente na proxima vez
-        String str = Flow.encodeString();
-        File arquivo = Flow.escolherArquivo(1);
-        if (arquivo != null) {
-            if (Flow.escreverTexto(arquivo, str)) {
-                JOptionPane.showMessageDialog(
-                        this, "Texto Escrito com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(
-                        this, "Erro ao escrever Texto!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(
-                    this, "Erro ao selecionar arquivo para escrita!");
-        }
+        Flow.saveFile(this);
     }//GEN-LAST:event_menu_button_saveActionPerformed
 
     private void menu_button_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_button_openActionPerformed
-        File arquivo = Flow.escolherArquivo(0);
-        String str = Flow.lerTexto(arquivo);
-        
-        //Reseta os registros ja existentes, se houverem, e as variaveis de controle
-        Flow.registros = null;
-        Flow.numRegistros = 0;
-        Flow.currentIndex = 0;
-        
-        //Decodifica a string e guarda em Flow.registros[]
-        Flow.decodeString(str);
-        
-        //Mostra o primeiro registro, se houver
-        if(Flow.registros != null)
-        {
-            text_area.setText(Flow.registros.get(0).toString());
-            UpdateUI();
-        }
-        
+        Flow.openFile(text_area);
+        UpdateUI();
     }//GEN-LAST:event_menu_button_openActionPerformed
 
     private void button_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nextActionPerformed
-        if(Flow.currentIndex < Flow.numRegistros - 1)
-        {
-            Flow.currentIndex++;
-            button_prev.setEnabled(true);
-            text_area.setText(Flow.registros.get(Flow.currentIndex).toString());
-        }
-        
+        Flow.nextEntry(button_prev, text_area);
+       
         //Ativa e desativa botões quando esta no começo/final da lista e atualiza o label
         UpdateUI();
         
     }//GEN-LAST:event_button_nextActionPerformed
 
     private void button_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addActionPerformed
-        String nome, tipo, nivel, vida, criatura_dados;
-        
-        nome  = field_nome.getText();
-        tipo = field_tipo.getText();
-        nivel = field_nivel.getText();
-        vida = field_vida.getText();
-        
-        //Cria uma nova criatura
-        Criatura criatura = new Criatura(nome, tipo, nivel, vida);
-        
-        //Pega as substrings dos campos da criatura
-        String[] subs = {nome, tipo, nivel, vida};
-        
-        //Adiciona a nova criatura ao registro
-        Flow.numRegistros++;
-        Flow.addRegistro(new Registro(subs, Flow.numRegistros));
+        //Pega os valores dos campos para serem passados como parametro
+        String nome  = field_nome.getText();
+        String tipo = field_tipo.getText();
+        String nivel = field_nivel.getText();
+        String vida = field_vida.getText();
         
         //Mostra na tela o novo registro
-        text_area.setText(Flow.registros.get(Flow.numRegistros - 1).toString());
-        
-        //Coloca o novo index como sendo o novo registro
-        Flow.currentIndex = Flow.numRegistros - 1;
+        text_area.setText(Flow.addEntry(nome, tipo, nivel, vida));
         
         //Atualiza os botões e labels
         UpdateUI();
-        
-        //Debug
-        criatura_dados = criatura.getStringDados();
-        
     }//GEN-LAST:event_button_addActionPerformed
 
     private void button_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_prevActionPerformed
+        //TODO: Editar esse !
         if(Flow.currentIndex > 0)
         {
             Flow.currentIndex--;

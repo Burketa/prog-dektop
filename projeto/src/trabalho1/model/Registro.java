@@ -7,15 +7,15 @@ package trabalho1.model;
 
 /**
  *
- * @author Burca
+ * @author burca
  */
 public class Registro {
 
     private int index;
     private String[] strFields;
 
-    public Registro(String[] field_str, int index) {
-        this.strFields = field_str;
+    public Registro(String[] strFields, int index) {
+        this.strFields = strFields;
         this.index = index;
     }
     
@@ -23,8 +23,8 @@ public class Registro {
         return strFields;
     }
 
-    public void setField_str(String[] field_str) {
-        this.strFields = field_str;
+    public void setField_str(String[] strFields) {
+        this.strFields = strFields;
     }
 
     public int getIndex() {
