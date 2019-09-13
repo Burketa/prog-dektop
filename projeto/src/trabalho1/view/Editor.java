@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalho1.view;
 
 import trabalho1.controller.Flow;
@@ -10,10 +5,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author fabricio
+ * @author burca
  */
 public class Editor extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form EditorTexto
      */
@@ -210,49 +205,49 @@ public class Editor extends javax.swing.JFrame {
 
     private void button_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_nextActionPerformed
         Flow.nextEntry(button_prev, text_area);
-       
+
         //Ativa e desativa botões quando esta no começo/final da lista e atualiza o label
         UpdateUI();
-        
+
     }//GEN-LAST:event_button_nextActionPerformed
 
     private void button_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_addActionPerformed
         //Pega os valores dos campos para serem passados como parametro
-        String nome  = field_nome.getText();
+        String nome = field_nome.getText();
         String tipo = field_tipo.getText();
         String nivel = field_nivel.getText();
         String vida = field_vida.getText();
-        
+
         //Mostra na tela o novo registro
         text_area.setText(Flow.addEntry(nome, tipo, nivel, vida));
-        
+
         //Atualiza os botões e labels
         UpdateUI();
     }//GEN-LAST:event_button_addActionPerformed
 
     private void button_prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_prevActionPerformed
         //TODO: Editar esse !
-        if(Flow.currentIndex > 0)
-        {
+        if (Flow.currentIndex > 0) {
             Flow.currentIndex--;
             button_next.setEnabled(true);
-            text_area.setText(Flow.registros.get(Flow.currentIndex).toString());
+            text_area.setText(Flow.entrys.get(Flow.currentIndex).toString());
         }
-        
+
         //Ativa e desativa botões quando esta no começo/final da lista e atualiza o label
         UpdateUI();
     }//GEN-LAST:event_button_prevActionPerformed
 
     private void button_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_deleteActionPerformed
         //Remove o registro
-        Flow.removeRegistro();
-        
+        Flow.removeEntry();
+
         //Se não possuir registros, mostrar um texto em branco
-        if(Flow.registros.size() > 0)
-            text_area.setText(Flow.registros.get(Flow.currentIndex).toString());
-        else
+        if (Flow.entrys.size() > 0) {
+            text_area.setText(Flow.entrys.get(Flow.currentIndex).toString());
+        } else {
             text_area.setText("");
-        
+        }
+
         //Faz o update do UI para ver quais botões serão deixados ativos ou não e atualiza os labels
         UpdateUI();
     }//GEN-LAST:event_button_deleteActionPerformed
@@ -260,24 +255,24 @@ public class Editor extends javax.swing.JFrame {
     private void button_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_updateActionPerformed
         //Cria um novo array de strings para atualizar nos registros
         String[] field_str = new String[4];
-        
+
         field_str[0] = field_nome.getText();
         field_str[1] = field_tipo.getText();
         field_str[2] = field_nivel.getText();
         field_str[3] = field_vida.getText();
-        
+
         //Atualiza o registro no Flow
-        Flow.registros.get(Flow.currentIndex).setField_str(field_str);
-        
+        Flow.entrys.get(Flow.currentIndex).setField_str(field_str);
+
         //Depois do registro atualizado, imprime na tela o registro alterado
-        text_area.setText(Flow.registros.get(Flow.currentIndex).toString());
-        
+        text_area.setText(Flow.entrys.get(Flow.currentIndex).toString());
+
         //Faz o update do UI
         UpdateUI();
     }//GEN-LAST:event_button_updateActionPerformed
 
     private void menu_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_aboutActionPerformed
-        JOptionPane.showMessageDialog(null,"isso é teste","Janela", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "isso é teste", "Janela", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_menu_aboutActionPerformed
 
     /**
@@ -341,47 +336,39 @@ public class Editor extends javax.swing.JFrame {
     private javax.swing.JMenuItem menu_button_save;
     private javax.swing.JTextArea text_area;
     // End of variables declaration//GEN-END:variables
+    
+    public void UpdateUI() {
+        CheckButtons();
+        UpdateLabels();
+    }
 
-    public void CheckButtons()
-    {
+    public void CheckButtons() {
         //Checa as condições para o botão PROXIMO
-        System.out.println(Flow.currentIndex);
-        System.out.println(Flow.numRegistros - 1);
-        System.out.println(Flow.registros);
-        
-        if(Flow.currentIndex == Flow.numRegistros - 1 || Flow.registros.isEmpty())
+        if (Flow.currentIndex == Flow.numEntrys - 1 || Flow.entrys.isEmpty()) {
             button_next.setEnabled(false);
-        else
+        } else {
             button_next.setEnabled(true);
-        
+        }
+
         //Checa as condições para o botão ANTERIOR
-        if(Flow.currentIndex == 0)
+        if (Flow.currentIndex == 0) {
             button_prev.setEnabled(false);
-        else
+        } else {
             button_prev.setEnabled(true);
-        
+        }
+
         //Checa as condições para o botão DELETE e UPDATE
-        if(Flow.numRegistros > 0 )
-        {
+        if (Flow.numEntrys > 0) {
             button_delete.setEnabled(true);
             button_update.setEnabled(true);
-        }
-        else
-        {
+        } else {
             button_delete.setEnabled(false);
             button_update.setEnabled(false);
         }
     }
-    
-    public void UpdateLabels()
-    {
+
+    public void UpdateLabels() {
         label_index.setText("Nº: " + (Flow.currentIndex + 1));
-        label_total.setText("Total: " + Flow.numRegistros);
-    }
-    
-    public void UpdateUI()
-    {
-        CheckButtons();
-        UpdateLabels();
+        label_total.setText("Total: " + Flow.numEntrys);
     }
 }
