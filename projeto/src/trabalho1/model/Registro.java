@@ -42,7 +42,7 @@ public class Registro {
         strBuilder.append(strFields[0]).append(Criatura.separador);
         strBuilder.append(strFields[1]).append(Criatura.separador);
         strBuilder.append(strFields[2]).append(Criatura.separador);
-        strBuilder.append(strFields[3]).append(Criatura.separador);
+        strBuilder.append(strFields[3]).append(Criatura.finalizador);
         
         System.out.println(strBuilder.toString());
         return strBuilder.toString();

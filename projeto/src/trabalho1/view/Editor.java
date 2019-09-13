@@ -6,9 +6,7 @@
 package trabalho1.view;
 
 import trabalho1.controller.Flow;
-import java.io.File;
 import javax.swing.JOptionPane;
-import trabalho1.model.*;
 
 /**
  *
@@ -347,7 +345,11 @@ public class Editor extends javax.swing.JFrame {
     public void CheckButtons()
     {
         //Checa as condições para o botão PROXIMO
-        if(Flow.currentIndex == Flow.numRegistros - 1 || Flow.registros.size() == 0)
+        System.out.println(Flow.currentIndex);
+        System.out.println(Flow.numRegistros - 1);
+        System.out.println(Flow.registros);
+        
+        if(Flow.currentIndex == Flow.numRegistros - 1 || Flow.registros.isEmpty())
             button_next.setEnabled(false);
         else
             button_next.setEnabled(true);

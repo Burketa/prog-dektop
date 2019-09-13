@@ -7,13 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import trabalho1.model.*;
 
 public class Flow {
 
     public static int numRegistros = 0, currentIndex = 0;
-    public static ArrayList<Registro> registros;
+    public static ArrayList<Registro> registros = new ArrayList();
 
     public static File escolherArquivo(int escolha) {
         String homeFolder = System.getProperty("user.dir");
@@ -115,9 +114,8 @@ public class Flow {
             }
         }
     }
-    
-    public static void saveFile(Component parentComponent)
-    {
+
+    public static void saveFile(Component parentComponent) {
         //Faz o encode dos registros pra forma certa pra poder ser aberto corretamente na proxima vez
         String str = encodeString();
         File arquivo = escolherArquivo(1);
@@ -134,51 +132,51 @@ public class Flow {
                     parentComponent, "Erro ao selecionar arquivo para escrita!");
         }
     }
-    
-    public static void openFile(JTextArea textArea) {                                                 
+
+    public static void openFile(JTextArea textArea) {
         File arquivo = escolherArquivo(0);
-        String str = lerTexto(arquivo);
-        
-        //Reseta os registros ja existentes, se houverem, e as variaveis de controle
-        registros = null;
-        numRegistros = 0;
-        currentIndex = 0;
-        
-        //Decodifica a string e guarda em Flow.registros[]
-        decodeString(str);
-        
-        //Mostra o primeiro registro, se houver
-        if(registros != null)
-        {
-            textArea.setText(registros.get(0).toString());
+        if (arquivo != null) {
+            String str = lerTexto(arquivo);
+
+            //Reseta os registros ja existentes, se houverem, e as variaveis de controle
+            registros = new ArrayList<>();
+            numRegistros = 0;
+            currentIndex = 0;
+
+            //Decodifica a string e guarda em Flow.registros[]
+            decodeString(str);
+
+            //Mostra o primeiro registro, se houver
+            if (!registros.isEmpty()) {
+                textArea.setText(registros.get(0).toString());
+            }
+
         }
-        
     }
-    
-    public static void nextEntry(JButton button, JTextArea textArea) {                                            
-        if(currentIndex < numRegistros - 1)
-        {
+
+    public static void nextEntry(JButton button, JTextArea textArea) {
+        if (currentIndex < numRegistros - 1) {
             currentIndex++;
             button.setEnabled(true);
             textArea.setText(Flow.registros.get(Flow.currentIndex).toString());
         }
     }
-    
-    public static String addEntry(String name, String type, String level, String life) {                                           
-                //Cria uma nova criatura
+
+    public static String addEntry(String name, String type, String level, String life) {
+        //Cria uma nova criatura
         Criatura criatura = new Criatura(name, type, level, life);
-        
+
         //Pega as substrings dos campos da criatura
         String[] subs = {name, type, level, life};
-        
+
         //Adiciona a nova criatura ao registro
         numRegistros++;
         addRegistro(new Registro(subs, numRegistros));
-        
+
         //Coloca o novo index como sendo o novo registro
         currentIndex = numRegistros - 1;
-        
+
         //Mostra na tela o novo registro
         return registros.get(numRegistros - 1).toString();
-    }        
+    }
 }
