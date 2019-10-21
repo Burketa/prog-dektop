@@ -1,0 +1,20 @@
+
+interface -> classe abstrata(hibrido, pode ou não ter metodos implementados) -> concreta -> final
+
+classe interna:
+    def: classe definida dentro de outra classe.
+    classe interna local: definida dentro de metodo (são completamente ocultas fora do metodo; não recebem modificador
+    de visibilidade)
+    classe interna anonima: definida dentro do retorno de um método.
+
+    public InnerClass innerclass = outerClassRef.new InnerClass();
+
+    SIM: classes internas acessam conteudo de mais de um nivel
+
+    clase interna pode ser final ? pode.
+
+    classe interna estatica pode ter herança ? sim.
+
+    classe interna local pode ser abstrata ? sim, pode
+
+    
