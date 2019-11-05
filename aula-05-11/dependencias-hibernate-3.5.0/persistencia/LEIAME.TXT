@@ -1,0 +1,10 @@
+Zip para tutorial da Caelum de Hibernate 3.5.0:
+http://blog.caelum.com.br/2010/04/14/as-dependencias-do-hibernate-3-5
+
+Esse zip é apenas para auxilia-lo a criar o primeiro projeto Hibernate.
+Utilizar o maven vai facilitar bastante o seu trabalho.
+
+Lembre-se que o Hibernate é frequentemente atualizado. Caso você baixe
+uma nova versão, é necessário atualizar todas as dependências também.
+
+A licença do Hibernate é LGPL, e de alguns outros jars aqui, Apache 2. 
